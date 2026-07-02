@@ -14,8 +14,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nexus | Modern Landing Page",
-  description: "Next.js, Tailwind CSS, shadcn/ui and Framer Motion",
+  title: "Nova AI Speaker | The Future of Sound and Intelligence",
+  description: "Experience unparalleled audio quality combined with next-generation AI. Nova adapts to your lifestyle, understands your needs, and controls your entire home with just your voice.",
+  keywords: ["AI Speaker", "Smart Home", "Voice Assistant", "Nova", "Noise Cancellation"],
+  openGraph: {
+    title: "Nova AI Speaker | The Future of Sound and Intelligence",
+    description: "Experience unparalleled audio quality combined with next-generation AI. Nova adapts to your lifestyle.",
+    url: "https://nova-speaker.example.com",
+    siteName: "Nova AI",
+    images: [
+      {
+        url: "/nova-speaker.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Nova AI Speaker",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nova AI Speaker | The Future of Sound and Intelligence",
+    description: "Experience unparalleled audio quality combined with next-generation AI.",
+    images: ["/nova-speaker.jpg"],
+  },
 };
 
 export default function RootLayout({

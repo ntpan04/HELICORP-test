@@ -53,6 +53,7 @@ export function Hero() {
                 alt="Nova AI Speaker" 
                 fill
                 priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent pointer-events-none"></div>
