@@ -1,8 +1,9 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform, type Variants } from "framer-motion"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useRef } from "react"
 
 const testimonials = [
   {
@@ -25,26 +26,62 @@ const testimonials = [
   }
 ]
 
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 50, scale: 0.95 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, delay: i * 0.15, ease: "easeOut" },
+  }),
+}
+
 export function Testimonials() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] })
+  const titleY = useTransform(scrollYProgress, [0, 1], ["30px", "-30px"])
+  const bgX = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"])
+
   return (
-    <section id="testimonials" className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section ref={sectionRef} id="testimonials" className="py-24 bg-muted/30 relative overflow-hidden">
+      {/* Parallax background blob */}
+      <motion.div
+        style={{ x: bgX }}
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent pointer-events-none"
+      />
+      <div className="container relative mx-auto px-4">
         <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Loved by early adopters</h2>
-          <p className="mt-4 text-muted-foreground md:text-lg max-w-2xl mx-auto">
+          <motion.h2
+            style={{ y: titleY }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold tracking-tight md:text-4xl"
+          >
+            Loved by early adopters
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="mt-4 text-muted-foreground md:text-lg max-w-2xl mx-auto"
+          >
             See what people are saying about their experience with Nova.
-          </p>
+          </motion.p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
+              custom={index}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-60px" }}
+              whileHover={{ y: -6, transition: { duration: 0.2 } }}
             >
-              <Card className="h-full bg-background border-none shadow-sm">
+              <Card className="h-full bg-background/50 backdrop-blur-sm border-primary/10 hover:border-primary/30 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
                 <CardHeader className="flex flex-row items-center gap-4 pb-4">
                   <Avatar>
                     <AvatarImage src={`https://avatar.vercel.sh/${testimonial.avatar}.png`} alt={testimonial.name} />
@@ -56,7 +93,7 @@ export function Testimonials() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground italic">"{testimonial.content}"</p>
+                  <p className="text-muted-foreground italic leading-relaxed">"{testimonial.content}"</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -66,3 +103,6 @@ export function Testimonials() {
     </section>
   )
 }
+
+
+

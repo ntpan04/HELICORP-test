@@ -26,6 +26,7 @@ export function Navbar() {
           <Link href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</Link>
           <Link href="#specs" className="text-muted-foreground hover:text-foreground transition-colors">Specs</Link>
           <Link href="#testimonials" className="text-muted-foreground hover:text-foreground transition-colors">Testimonials</Link>
+          <Link href="#subscribe" className="text-muted-foreground hover:text-foreground transition-colors">Subscribe</Link>
         </nav>
         <div className="flex items-center gap-4">
           <ThemeToggle />

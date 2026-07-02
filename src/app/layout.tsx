@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "sonner";
+import { ScrollTracker } from "@/components/ScrollTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://nova-speaker.example.com"),
   title: "Nova AI Speaker | The Future of Sound and Intelligence",
   description: "Experience unparalleled audio quality combined with next-generation AI. Nova adapts to your lifestyle, understands your needs, and controls your entire home with just your voice.",
   keywords: ["AI Speaker", "Smart Home", "Voice Assistant", "Nova", "Noise Cancellation"],
@@ -24,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "Nova AI",
     images: [
       {
-        url: "/nova-speaker.jpg",
+        url: "/nova-speaker.png",
         width: 1200,
         height: 630,
         alt: "Nova AI Speaker",
@@ -37,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nova AI Speaker | The Future of Sound and Intelligence",
     description: "Experience unparalleled audio quality combined with next-generation AI.",
-    images: ["/nova-speaker.jpg"],
+    images: ["/nova-speaker.png"],
   },
 };
 
@@ -60,6 +63,19 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <ScrollTracker />
+          <Toaster
+            position="bottom-right"
+            richColors
+            closeButton
+            toastOptions={{
+              style: {
+                background: "hsl(var(--card))",
+                border: "1px solid hsl(var(--border))",
+                color: "hsl(var(--foreground))",
+              }
+            }}
+          />
         </ThemeProvider>
       </body>
     </html>
