@@ -16,10 +16,10 @@ export function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">
-              🚀
+            <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-primary to-purple-600 flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20">
+              ✧
             </div>
-            Nexus
+            Nova
           </Link>
         </div>
         <nav className="hidden md:flex gap-6 text-sm font-medium">

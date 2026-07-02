@@ -9,10 +9,10 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-4 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight mb-4">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">
-                🚀
-              </div>
-              Nexus
+              <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-primary to-purple-600 flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20">
+              ✧
+            </div>
+            Nova
             </Link>
             <p className="text-muted-foreground max-w-sm">
               Building the future of web applications with modern technologies. Fast, secure, and beautiful.
@@ -46,7 +46,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Nexus Inc. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Nova Inc. All rights reserved.</p>
           <div className="flex gap-4">
             <Link href="#" className="hover:text-foreground transition-colors">Twitter</Link>
             <Link href="#" className="hover:text-foreground transition-colors">GitHub</Link>

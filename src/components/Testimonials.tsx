@@ -7,20 +7,20 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 const testimonials = [
   {
     name: "Alex Johnson",
-    role: "CTO at TechCorp",
-    content: "This template has completely transformed how we build landing pages. The integration of Framer Motion and shadcn/ui is absolutely flawless.",
+    role: "Smart Home Enthusiast",
+    content: "Nova has completely transformed how I interact with my home. The voice recognition is flawless and the sound quality is mind-blowing.",
     avatar: "AJ"
   },
   {
     name: "Sarah Williams",
-    role: "Frontend Developer",
-    content: "I've never been able to set up a dark mode-ready, beautiful landing page this quickly. Next.js 15 makes it crazy fast.",
+    role: "Tech Reviewer",
+    content: "I've tested dozens of smart speakers, but Nova's AI recommendations are on another level. It actually anticipates my needs.",
     avatar: "SW"
   },
   {
     name: "Michael Chen",
-    role: "Startup Founder",
-    content: "Our conversion rates doubled after switching to this design. The aesthetic is incredibly premium and trustworthy.",
+    role: "Audiophile",
+    content: "The noise cancellation is shockingly good. I can whisper a command from across the room while music is playing, and it hears me perfectly.",
     avatar: "MC"
   }
 ]
@@ -30,9 +30,9 @@ export function Testimonials() {
     <section id="testimonials" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Loved by developers</h2>
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Loved by early adopters</h2>
           <p className="mt-4 text-muted-foreground md:text-lg max-w-2xl mx-auto">
-            Don't just take our word for it. Here's what the community has to say.
+            See what people are saying about their experience with Nova.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
