@@ -43,7 +43,7 @@ export const products: Product[] = [
     tagline: "Compact Powerhouse",
     description: "All the intelligence of the Nova AI Speaker in a compact, portable design. Perfect for smaller rooms or on-the-go adventures.",
     price: 149,
-    image: "https://images.unsplash.com/photo-1589003071536-83815341a674?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1545127398-14699f92334b?q=80&w=600&auto=format&fit=crop",
     features: [
       { title: "Portable", description: "Lightweight and easy to carry.", iconName: "Mic" },
       { title: "Water Resistant", description: "IP67 rated for outdoor use.", iconName: "Home" }

@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { FeaturedProducts } from "@/components/FeaturedProducts";
 import dynamic from "next/dynamic";
 import { SectionSkeleton, SpecsSkeleton, TestimonialsSkeleton } from "@/components/SectionSkeleton";
 
@@ -21,6 +22,7 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <FeaturedProducts />
         <FeatureCards />
         <Specs />
         <Testimonials />

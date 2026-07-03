@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Product } from './data';
+import { toast } from 'sonner';
 
 interface CartItem extends Product {
   quantity: number;
@@ -41,10 +42,12 @@ export const useStore = create<StoreState>()(
         } else {
           set({ cart: [...cart, { ...product, quantity: 1 }] });
         }
+        toast.success(`Đã thêm ${product.name} vào giỏ hàng`);
       },
 
       removeFromCart: (productId) => {
         set({ cart: get().cart.filter(item => item.id !== productId) });
+        toast.info("Đã xóa sản phẩm khỏi giỏ hàng");
       },
 
       updateQuantity: (productId, quantity) => {
@@ -56,15 +59,20 @@ export const useStore = create<StoreState>()(
         });
       },
       
-      clearCart: () => set({ cart: [] }),
+      clearCart: () => {
+        set({ cart: [] });
+        toast.info("Đã làm trống giỏ hàng");
+      },
 
       toggleWishlist: (product) => {
         const wishlist = get().wishlist;
         const exists = wishlist.some(item => item.id === product.id);
         if (exists) {
           set({ wishlist: wishlist.filter(item => item.id !== product.id) });
+          toast.info(`Đã gỡ ${product.name} khỏi danh sách yêu thích`);
         } else {
           set({ wishlist: [...wishlist, product] });
+          toast.success(`Đã thêm ${product.name} vào yêu thích`);
         }
       },
 

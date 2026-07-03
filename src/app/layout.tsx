@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import { ScrollTracker } from "@/components/ScrollTracker";
+import { Chatbot } from "@/components/Chatbot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,18 +64,14 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Chatbot />
           <ScrollTracker />
           <Toaster
             position="bottom-right"
             richColors
             closeButton
-            toastOptions={{
-              style: {
-                background: "hsl(var(--card))",
-                border: "1px solid hsl(var(--border))",
-                color: "hsl(var(--foreground))",
-              }
-            }}
+            duration={3000}
+            theme="light"
           />
         </ThemeProvider>
       </body>
