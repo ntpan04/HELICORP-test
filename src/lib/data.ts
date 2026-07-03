@@ -1,5 +1,3 @@
-import { Mic, Home, VolumeX, Sparkles } from "lucide-react"
-
 export const productData = {
   name: "Nova AI Speaker",
   tagline: "The Future of Sound and Intelligence",

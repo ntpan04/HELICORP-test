@@ -93,7 +93,7 @@ export function Testimonials() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground italic leading-relaxed">"{testimonial.content}"</p>
+                  <p className="text-muted-foreground italic leading-relaxed">&quot;{testimonial.content}&quot;</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -103,6 +103,5 @@ export function Testimonials() {
     </section>
   )
 }
-
 
 
