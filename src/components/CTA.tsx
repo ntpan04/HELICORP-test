@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { subscribeEmail } from "@/app/actions"
 import { useActionState, useEffect, useRef } from "react"
 import { toast } from "sonner"
-import { Loader2, Mail } from "lucide-react"
+import { Loader2, Mail, ArrowRight } from "lucide-react"
 
 const initialState = { success: false, message: "" }
 
@@ -17,13 +17,13 @@ export function CTA() {
   useEffect(() => {
     if (state?.message) {
       if (state.success) {
-        toast.success("Đăng ký thành công!", {
+        toast.success("Success!", {
           description: state.message,
           duration: 5000,
         })
         formRef.current?.reset()
       } else {
-        toast.error("Có lỗi xảy ra", {
+        toast.error("Error", {
           description: state.message,
           duration: 4000,
         })
@@ -32,66 +32,73 @@ export function CTA() {
   }, [state])
 
   return (
-    <section id="subscribe" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background"></div>
-      <div className="container relative mx-auto px-4">
+    <section id="subscribe" className="py-32 md:py-48 relative overflow-hidden bg-background">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-background pointer-events-none" />
+      <div className="container relative mx-auto px-4 max-w-5xl">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center justify-center text-center space-y-8 p-12 md:p-20 rounded-[3rem] bg-card/60 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-purple-500/10 max-w-5xl mx-auto relative overflow-hidden"
+          initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: [0.32, 0.72, 0, 1] }}
+          className="p-2 rounded-[3rem] bg-black/5 dark:bg-white/5 ring-1 ring-black/5 dark:ring-white/10"
         >
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none"></div>
+          <div className="rounded-[calc(3rem-0.5rem)] bg-background/80 backdrop-blur-3xl h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] flex flex-col items-center justify-center text-center py-20 px-6 md:px-20 relative overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-sm font-medium text-primary"
-          >
-            <Mail className="h-4 w-4" />
-            Early Access Waitlist
-          </motion.div>
-
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight max-w-3xl">
-            Be the first to experience <span className="text-primary">Nova</span>
-          </h2>
-          <p className="text-muted-foreground md:text-xl max-w-2xl">
-            Join our exclusive waitlist and get early access, special pricing, and latest updates straight to your inbox.
-          </p>
-
-          <form
-            ref={formRef}
-            action={formAction}
-            className="flex flex-col sm:flex-row gap-3 w-full max-w-md mt-4"
-          >
-            <Input
-              type="email"
-              name="email"
-              placeholder="Enter your email address"
-              required
-              disabled={isPending}
-              className="h-14 px-6 text-base rounded-full bg-background/50 border-primary/20 focus-visible:ring-primary/50 disabled:opacity-60"
-            />
-            <Button
-              type="submit"
-              size="lg"
-              disabled={isPending}
-              className="h-14 px-8 text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all shrink-0 min-w-[130px]"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.8, ease: [0.32, 0.72, 0, 1] }}
+              className="mb-8 inline-flex items-center gap-2 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 px-5 py-2 text-xs font-medium uppercase tracking-[0.2em] text-foreground"
             >
-              {isPending ? (
-                <Loader2 className="h-5 w-5 animate-spin" />
-              ) : (
-                "Subscribe"
-              )}
-            </Button>
-          </form>
+              <Mail className="h-3.5 w-3.5" strokeWidth={1.5} />
+              Early Access
+            </motion.div>
 
-          <p className="text-xs text-muted-foreground">
-            We respect your privacy. Unsubscribe at any time.
-          </p>
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter max-w-3xl mb-6 text-foreground leading-[1.1]">
+              Be the first to experience <span className="text-transparent bg-clip-text bg-gradient-to-br from-foreground via-foreground to-foreground/50">Nova</span>
+            </h2>
+            <p className="text-muted-foreground md:text-xl max-w-2xl font-light leading-relaxed mb-12">
+              Join our exclusive waitlist and get early access, special pricing, and latest updates straight to your inbox.
+            </p>
+
+            <form
+              ref={formRef}
+              action={formAction}
+              className="flex flex-col sm:flex-row gap-3 w-full max-w-lg relative z-10"
+            >
+              <Input
+                type="email"
+                name="email"
+                placeholder="Enter your email address"
+                required
+                disabled={isPending}
+                className="h-16 px-8 text-lg rounded-full bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 focus-visible:ring-1 focus-visible:ring-foreground disabled:opacity-60 placeholder:text-muted-foreground/50 transition-colors"
+              />
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isPending}
+                className="h-16 pl-8 pr-2 py-2 text-lg rounded-full bg-foreground text-background hover:bg-foreground/90 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] shrink-0 flex items-center gap-4 group/btn shadow-xl"
+              >
+                {isPending ? (
+                  <Loader2 className="h-5 w-5 animate-spin mx-4" />
+                ) : (
+                  <>
+                    <span className="font-semibold tracking-wide">Subscribe</span>
+                    <div className="w-12 h-12 rounded-full bg-background/20 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/btn:scale-105 group-hover/btn:bg-background/30 group-hover/btn:translate-x-1">
+                      <ArrowRight className="w-5 h-5 text-background" strokeWidth={1.5} />
+                    </div>
+                  </>
+                )}
+              </Button>
+            </form>
+
+            <p className="text-xs text-muted-foreground mt-8 uppercase tracking-widest font-medium">
+              We respect your privacy. Unsubscribe at any time.
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>
