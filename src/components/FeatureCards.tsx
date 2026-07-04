@@ -72,7 +72,7 @@ export function FeatureCards() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid gap-6 grid-cols-1 md:grid-cols-2 w-full max-w-5xl mx-auto"
+          className="grid gap-6 grid-cols-2 w-full max-w-5xl mx-auto"
         >
           {productData.features.map((feature, index) => {
             const IconComponent = iconMap[feature.iconName] || Sparkles
@@ -90,10 +90,10 @@ export function FeatureCards() {
                     </div>
                     
                     <div className="mt-auto">
-                      <h3 className="font-semibold tracking-tight text-foreground text-3xl md:text-4xl mb-4">
+                      <h3 className="font-semibold tracking-tight text-foreground text-xl md:text-4xl mb-2 md:mb-4">
                         {feature.title}
                       </h3>
-                      <p className="text-lg text-muted-foreground leading-relaxed font-light">
+                      <p className="text-sm md:text-lg text-muted-foreground leading-relaxed font-light line-clamp-3 md:line-clamp-none">
                         {feature.description}
                       </p>
                     </div>

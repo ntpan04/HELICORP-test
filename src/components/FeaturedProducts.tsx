@@ -38,7 +38,7 @@ export function FeaturedProducts() {
             Experience the next generation of smart audio. Add to cart or save to your wishlist to test the features!
           </motion.p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
           {products.slice(0, 4).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

@@ -10,7 +10,7 @@ export function SectionSkeleton() {
         <Skeleton className="h-5 w-72 rounded-xl" />
       </div>
       {/* Grid cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
         {[...Array(4)].map((_, i) => (
           <div key={i} className="flex flex-col gap-3 p-6 rounded-2xl border border-primary/10 bg-card/30">
             <Skeleton className="h-14 w-14 rounded-2xl" />

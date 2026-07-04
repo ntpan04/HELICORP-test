@@ -104,8 +104,8 @@ export function CTA() {
               <Link 
                 href="/subscribers"
                 className={cn(
-                  buttonVariants({ variant: "outline" }),
-                  "rounded-full bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+                  buttonVariants({ variant: "default" }),
+                  "w-full sm:w-auto max-w-lg h-16 px-8 flex items-center justify-center text-lg rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-bold shadow-lg hover:scale-105 hover:shadow-xl hover:opacity-90 transition-all duration-300 border-none"
                 )}
               >
                 View subscriber list

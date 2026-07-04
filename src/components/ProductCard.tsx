@@ -45,23 +45,28 @@ export function ProductCard({ product }: { product: Product }) {
             </div>
           </Link>
           
-          <div className="flex gap-3 mt-auto z-10">
+          <div className="flex mt-auto z-10">
             <Button 
-              className="flex-1 h-12 rounded-full gap-2 shadow-sm transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] hover:shadow-md" 
+              className="w-full h-12 rounded-full gap-2 shadow-sm transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] hover:shadow-md" 
               onClick={() => addToCart(product)}
             >
               <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
               <span className="font-semibold">Add to Cart</span>
             </Button>
-            <Button 
-              variant="outline" 
-              size="icon"
-              onClick={() => toggleWishlist(product)}
-              className={`h-12 w-12 rounded-full border-black/10 dark:border-white/10 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${isWishlisted ? "text-red-500 border-red-500/30 bg-red-500/10 hover:bg-red-500/20" : "hover:bg-black/5 dark:hover:bg-white/5"}`}
-            >
-              <Heart className={`w-5 h-5 ${isWishlisted ? "fill-current" : ""}`} strokeWidth={1.25} />
-            </Button>
           </div>
+          
+          <Button 
+            variant="outline" 
+            size="icon"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleWishlist(product);
+            }}
+            className={`absolute top-7 right-7 z-20 h-10 w-10 md:h-11 md:w-11 rounded-full border-black/10 dark:border-white/10 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] shadow-sm backdrop-blur-md ${isWishlisted ? "text-red-500 border-red-500/30 bg-red-500/10 hover:bg-red-500/20" : "bg-white/50 dark:bg-black/50 hover:bg-white/80 dark:hover:bg-black/80"}`}
+          >
+            <Heart className={`w-4 h-4 md:w-5 md:h-5 ${isWishlisted ? "fill-current" : ""}`} strokeWidth={1.25} />
+          </Button>
         </div>
       </div>
     </motion.div>
