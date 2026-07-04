@@ -3,8 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
-import { ScrollTracker } from "@/components/ScrollTracker";
-import { Chatbot } from "@/components/Chatbot";
+import dynamic from "next/dynamic";
+
+const Chatbot = dynamic(() => import("@/components/Chatbot").then(mod => mod.Chatbot));
+const ScrollTracker = dynamic(() => import("@/components/ScrollTracker").then(mod => mod.ScrollTracker));
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

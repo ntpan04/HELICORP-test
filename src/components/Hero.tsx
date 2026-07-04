@@ -1,9 +1,8 @@
 "use client"
 
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { productData } from "@/lib/data"
-import Image from "next/image"
 import { useRef, useState, useCallback } from "react"
 import { ArrowUpRight, Play } from "lucide-react"
 
@@ -45,10 +44,8 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] })
 
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"])
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"])
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "60%"])
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
-  const springImageY = useSpring(imageY, { stiffness: 100, damping: 30 })
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-background pt-32 pb-48 md:pt-40 md:pb-56 min-h-[100dvh] flex flex-col justify-center">
@@ -112,31 +109,6 @@ export function Hero() {
               <span className="font-semibold">Watch Film</span>
             </Button>
           </MagneticButton>
-        </motion.div>
-
-        <motion.div
-          style={{ y: springImageY }}
-          initial={{ opacity: 0, y: 100, scale: 0.95, filter: "blur(20px)" }}
-          animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-          transition={{ duration: 1.2, delay: 0.4, ease: [0.32, 0.72, 0, 1] }}
-          className="mt-24 w-full max-w-6xl mx-auto"
-        >
-          {/* Double-Bezel Architecture */}
-          <div className="p-2 rounded-[2.5rem] bg-black/5 dark:bg-white/5 ring-1 ring-black/5 dark:ring-white/10 shadow-2xl backdrop-blur-xl">
-            <div className="rounded-[calc(2.5rem-0.5rem)] overflow-hidden bg-background shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] relative">
-              <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent z-10 pointer-events-none" />
-              <Image
-                src="/nova-speaker.png"
-                alt="Nova AI Speaker"
-                width={1600}
-                height={1000}
-                priority
-                quality={100}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                className="w-full h-auto object-cover transform scale-105 hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.32,0.72,0,1)]"
-              />
-            </div>
-          </div>
         </motion.div>
       </div>
 

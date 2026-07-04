@@ -9,6 +9,7 @@ import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Heart, Check, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export default function ProductDetailsPage({ params }: { params: Promise<{ id: string }> }) {
@@ -41,11 +42,14 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
           </Link>
           
           <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <div className="rounded-2xl overflow-hidden bg-muted">
-              <img 
+            <div className="rounded-2xl overflow-hidden bg-muted relative aspect-square">
+              <Image 
                 src={product.image} 
                 alt={product.name}
-                className="w-full h-full object-cover aspect-square" 
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+                className="object-cover" 
               />
             </div>
             

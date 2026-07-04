@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { X, Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -49,7 +50,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               ) : (
                 cart.map(item => (
                   <div key={item.id} className="flex gap-4 border-b pb-4">
-                    <img src={item.image} alt={item.name} className="w-20 h-20 rounded-md object-cover" />
+                    <div className="relative w-20 h-20 shrink-0">
+                      <Image src={item.image} alt={item.name} fill sizes="80px" className="rounded-md object-cover" />
+                    </div>
                     <div className="flex-1">
                       <h4 className="font-semibold line-clamp-1">{item.name}</h4>
                       <p className="text-sm text-muted-foreground">${item.price}</p>

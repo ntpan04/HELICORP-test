@@ -5,6 +5,7 @@ import { useStore } from "@/lib/store";
 import { X, ShoppingCart, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 interface WishlistSidebarProps {
   isOpen: boolean;
@@ -48,7 +49,9 @@ export function WishlistSidebar({ isOpen, onClose }: WishlistSidebarProps) {
               ) : (
                 wishlist.map(item => (
                   <div key={item.id} className="flex gap-4 border-b pb-4 relative group">
-                    <img src={item.image} alt={item.name} className="w-20 h-20 rounded-md object-cover" />
+                    <div className="relative w-20 h-20 shrink-0">
+                      <Image src={item.image} alt={item.name} fill sizes="80px" className="rounded-md object-cover" />
+                    </div>
                     <div className="flex-1 flex flex-col">
                       <Link href={`/products/${item.id}`} onClick={onClose}>
                         <h4 className="font-semibold line-clamp-1 hover:text-primary transition-colors">{item.name}</h4>
