@@ -1,30 +1,15 @@
 "use server"
 
 import { z } from "zod"
-import { promises as fs } from "fs"
-import path from "path"
 
 const SubscribeSchema = z.object({
   email: z
     .string()
-    .min(1, "Email không được để trống.")
-    .email("Địa chỉ email không hợp lệ. Vui lòng kiểm tra lại."),
+    .min(1, "Email is required.")
+    .email("Invalid email address. Please try again."),
 })
 
-const DB_PATH = path.join(process.cwd(), "data", "subscribers.json")
-
-async function readSubscribers(): Promise<{ subscribers: { email: string; createdAt: string }[] }> {
-  try {
-    const content = await fs.readFile(DB_PATH, "utf-8")
-    return JSON.parse(content)
-  } catch {
-    return { subscribers: [] }
-  }
-}
-
-async function writeSubscribers(data: { subscribers: { email: string; createdAt: string }[] }) {
-  await fs.writeFile(DB_PATH, JSON.stringify(data, null, 2), "utf-8")
-}
+const API_URL = "https://6a48a3daa033dcb98d64ba5e.mockapi.io/nova/subcribe"
 
 export async function subscribeEmail(prevState: { success: boolean; message: string } | null, formData: FormData) {
   const email = formData.get("email")
@@ -38,35 +23,49 @@ export async function subscribeEmail(prevState: { success: boolean; message: str
     }
   }
 
-  const db = await readSubscribers()
+  try {
+    // Check if email already exists
+    const checkRes = await fetch(`${API_URL}?email=${parsed.data.email}`)
+    if (checkRes.ok) {
+      const existingUsers = await checkRes.json()
+      if (Array.isArray(existingUsers) && existingUsers.length > 0) {
+        // Also check exact match to be safe against partial search
+        const exactMatch = existingUsers.some(
+          (u) => u.email.toLowerCase() === parsed.data.email.toLowerCase()
+        )
+        if (exactMatch) {
+          return {
+            success: false,
+            message: "This email is already subscribed!",
+          }
+        }
+      }
+    }
 
-  const alreadyExists = db.subscribers.some(
-    (s) => s.email.toLowerCase() === parsed.data.email.toLowerCase()
-  )
+    // Add new subscriber
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: parsed.data.email,
+        createdAt: new Date().toISOString(),
+      }),
+    })
 
-  if (alreadyExists) {
+    if (!res.ok) {
+      throw new Error("Failed to subscribe")
+    }
+
+    return {
+      success: true,
+      message: "🎉 Thank you! We will notify you as soon as Nova launches.",
+    }
+  } catch (error) {
     return {
       success: false,
-      message: "Email này đã được đăng ký trước đó rồi!",
+      message: "An error occurred. Please try again later.",
     }
-  }
-
-  db.subscribers.push({
-    email: parsed.data.email,
-    createdAt: new Date().toISOString(),
-  })
-
-  await writeSubscribers(db)
-
-  // Optional: Forward to a real webhook
-  // await fetch("https://your-webhook-url.com", {
-  //   method: "POST",
-  //   body: JSON.stringify({ email: parsed.data.email }),
-  //   headers: { "Content-Type": "application/json" },
-  // })
-
-  return {
-    success: true,
-    message: "🎉 Cảm ơn bạn! Chúng tôi sẽ thông báo sớm nhất khi Nova ra mắt.",
   }
 }

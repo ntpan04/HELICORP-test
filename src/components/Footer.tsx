@@ -33,6 +33,7 @@ export function Footer() {
               <li><Link href="#" className="hover:text-foreground transition-colors duration-300">About Us</Link></li>
               <li><Link href="#" className="hover:text-foreground transition-colors duration-300">Careers</Link></li>
               <li><Link href="#" className="hover:text-foreground transition-colors duration-300">Blog</Link></li>
+              <li><Link href="/subscribers" className="hover:text-foreground transition-colors duration-300">Subscribers</Link></li>
               <li><Link href="#" className="hover:text-foreground transition-colors duration-300">Contact</Link></li>
             </ul>
           </div>

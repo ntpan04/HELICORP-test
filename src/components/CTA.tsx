@@ -1,12 +1,14 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
 import { subscribeEmail } from "@/app/actions"
 import { useActionState, useEffect, useRef } from "react"
 import { toast } from "sonner"
 import { Loader2, Mail, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 const initialState = { success: false, message: "" }
 
@@ -95,9 +97,20 @@ export function CTA() {
               </Button>
             </form>
 
-            <p className="text-xs text-muted-foreground mt-8 uppercase tracking-widest font-medium">
-              We respect your privacy. Unsubscribe at any time.
-            </p>
+            <div className="mt-8 flex flex-col items-center gap-6">
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium">
+                We respect your privacy. Unsubscribe at any time.
+              </p>
+              <Link 
+                href="/subscribers"
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "rounded-full bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+                )}
+              >
+                View subscriber list
+              </Link>
+            </div>
           </div>
         </motion.div>
       </div>
